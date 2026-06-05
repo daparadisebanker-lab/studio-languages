@@ -201,9 +201,9 @@ export default function ContactForm() {
               <br />
               <em style={{ fontStyle: 'italic', color: '#c4603a' }}>lugar.</em>
               <br />
-              El programa inicia
+              Las clases inician
               <br />
-              en agosto 2026.
+              el 22 de junio.
             </h2>
 
             {/* Body */}

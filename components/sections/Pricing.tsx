@@ -12,12 +12,13 @@ interface PriceCardProps {
   desc: string
   amount: string
   note: string
+  bundle?: string
   featured: boolean
   index: number
   isMobile: boolean
 }
 
-function PriceCard({ badge, format, duration, desc, amount, note, featured, index, isMobile }: PriceCardProps) {
+function PriceCard({ badge, format, duration, desc, amount, note, bundle, featured, index, isMobile }: PriceCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -123,11 +124,28 @@ function PriceCard({ badge, format, duration, desc, amount, note, featured, inde
           letterSpacing: '0.08em',
           color: featured ? 'rgba(245,240,232,0.5)' : '#1a1410',
           opacity: featured ? 1 : 0.4,
-          margin: 0,
+          margin: bundle ? '0 0 16px 0' : 0,
         }}
       >
         {note}
       </p>
+
+      {/* Bundle option */}
+      {bundle && (
+        <p
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: '10px',
+            letterSpacing: '0.08em',
+            color: featured ? 'rgba(245,240,232,0.7)' : '#c4603a',
+            borderTop: featured ? '1px solid rgba(245,240,232,0.2)' : '1px solid rgba(196,96,58,0.2)',
+            paddingTop: '12px',
+            margin: 0,
+          }}
+        >
+          {bundle}
+        </p>
+      )}
     </motion.div>
   )
 }
@@ -136,28 +154,30 @@ const tiers: Omit<PriceCardProps, 'index' | 'isMobile'>[] = [
   {
     badge: 'Estándar',
     format: 'Programa mensual',
-    duration: '4 sesiones · 90 min c/u',
-    desc: 'Programa de 4 sesiones mensuales individuales. Contenido personalizado según tu disciplina e institución objetivo. Para estudiantes en etapa de preparación con 12+ meses antes de su aplicación.',
-    amount: 'S/ 280',
+    duration: 'Clases virtuales grupales',
+    desc: 'Clases en línea con profesor nativo especializado en arte y diseño. Para estudiantes en etapa de preparación con 12+ meses antes de su aplicación.',
+    amount: 'S/ 400',
     note: 'por mes · sin matrícula',
+    bundle: 'Paquete 5 meses · S/ 1,800',
     featured: false,
   },
   {
     badge: 'Más elegido',
     format: 'Programa intensivo',
-    duration: '8 sesiones · 90 min c/u',
-    desc: 'Doble frecuencia mensual. Para estudiantes en año de aplicación activo o que quieren acelerar el progreso. Incluye preparación completa de materiales de admisión.',
-    amount: 'S/ 480',
-    note: 'por mes · todo incluido',
+    duration: 'Clases virtuales grupales',
+    desc: 'Mayor frecuencia semanal. Para estudiantes en año de aplicación activo o que quieren acelerar el progreso hacia su institución objetivo.',
+    amount: 'S/ 720',
+    note: 'por mes · sin matrícula',
+    bundle: 'Paquete 5 meses · S/ 3,000',
     featured: true,
   },
   {
-    badge: 'Aplicación',
+    badge: 'Admisión',
     format: 'Paquete de admisión',
-    duration: 'Proyecto de 6 semanas',
-    desc: 'Para estudiantes que ya tienen nivel intermedio y necesitan los materiales de aplicación: artist statement, carta de motivación y preparación de entrevista. Proyecto único con entregables definidos.',
-    amount: 'S/ 890',
-    note: 'pago único · 6 semanas',
+    duration: 'Proyecto cerrado',
+    desc: 'Para estudiantes con nivel intermedio que necesitan los materiales de aplicación: artist statement, carta de motivación y preparación para entrevista de portafolio.',
+    amount: 'S/ 990',
+    note: 'pago único · entregables definidos',
     featured: false,
   },
 ]
@@ -236,7 +256,7 @@ export default function Pricing() {
             margin: '0 0 64px 0',
           }}
         >
-          Todos los programas incluyen sesiones individuales con profesor nativo especializado. El contenido se calibra al perfil y destino de cada estudiante.
+          Clases virtuales grupales con profesor nativo especializado en arte y diseño. El contenido está orientado a las escuelas europeas a las que apuntas — no a un currículo genérico.
         </motion.p>
 
         {/* Pricing Grid */}

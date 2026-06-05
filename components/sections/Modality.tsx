@@ -36,8 +36,8 @@ const IconAward = () => (
 const cards = [
   {
     icon: <IconPerson />,
-    name: 'Sesiones 1 a 1',
-    desc: 'Cada clase es una sesión individual con un profesor nativo especializado en arte y diseño. El contenido se calibra al perfil del estudiante — sus instituciones objetivo, su disciplina, su nivel actual.',
+    name: 'Clases virtuales en vivo',
+    desc: 'Sesiones grupales en línea con profesor nativo especializado en arte y diseño. Grupos reducidos, diseñados para el contexto específico de las escuelas europeas a las que apuntan los estudiantes.',
   },
   {
     icon: <IconSliders />,
@@ -184,8 +184,8 @@ export default function Modality() {
             margin: 0,
           }}
         >
-          El programa no es un grupo de conversación. Es un acompañamiento personalizado hacia una
-          meta institucional específica.
+          No son clases de idiomas genéricas. Cada sesión está diseñada para el contexto exacto de
+          las escuelas europeas de arte y diseño a las que apuntas.
         </motion.p>
 
         {/* 3-col cards grid */}
