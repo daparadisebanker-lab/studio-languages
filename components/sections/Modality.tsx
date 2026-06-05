@@ -1,24 +1,51 @@
 'use client'
 
+import React from 'react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useIsMobile } from '@/lib/useIsMobile'
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number]
 
+const IconPerson = () => (
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c4603a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="8" r="4"/>
+    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+  </svg>
+)
+const IconSliders = () => (
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c4603a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="4" y1="21" x2="4" y2="14"/>
+    <line x1="4" y1="10" x2="4" y2="3"/>
+    <line x1="12" y1="21" x2="12" y2="12"/>
+    <line x1="12" y1="8" x2="12" y2="3"/>
+    <line x1="20" y1="21" x2="20" y2="16"/>
+    <line x1="20" y1="12" x2="20" y2="3"/>
+    <line x1="1" y1="14" x2="7" y2="14"/>
+    <line x1="9" y1="8" x2="15" y2="8"/>
+    <line x1="17" y1="16" x2="23" y2="16"/>
+  </svg>
+)
+const IconAward = () => (
+  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c4603a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="9" r="6"/>
+    <path d="M15.477 13.89 17 22l-5-3-5 3 1.523-8.11"/>
+  </svg>
+)
+
 const cards = [
   {
-    icon: '🎯',
+    icon: <IconPerson />,
     name: 'Sesiones 1 a 1',
     desc: 'Cada clase es una sesión individual con un profesor nativo especializado en arte y diseño. El contenido se calibra al perfil del estudiante — sus instituciones objetivo, su disciplina, su nivel actual.',
   },
   {
-    icon: '📚',
+    icon: <IconSliders />,
     name: 'Contenido a medida',
     desc: 'No existe un currículo genérico. El mapa de contenidos se construye a partir del programa al que aplica el estudiante. Lo que aprendes es exactamente lo que necesitas saber para llegar ahí.',
   },
   {
-    icon: '🏛️',
+    icon: <IconAward />,
     name: 'Preparación de admisión',
     desc: 'El programa culmina en las herramientas concretas de aplicación: el artist statement en el idioma de destino, la carta de motivación, la preparación para la entrevista de portafolio.',
   },
@@ -31,7 +58,7 @@ function ModalityCard({
   index,
   isMobile,
 }: {
-  icon: string
+  icon: React.ReactNode
   name: string
   desc: string
   index: number
@@ -56,7 +83,7 @@ function ModalityCard({
         cursor: 'default',
       }}
     >
-      <span style={{ fontSize: 32, marginBottom: 20, display: 'block' }}>{icon}</span>
+      <div style={{ marginBottom: 20 }}>{icon}</div>
       <h3
         style={{
           fontFamily: 'var(--font-display)',
