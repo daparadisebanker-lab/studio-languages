@@ -58,7 +58,7 @@ const steps = [
     icon: <IconBook />,
     number: '03',
     title: 'Programa en marcha',
-    desc: 'Clases 1 a 1 con profesor nativo, contenido especializado, ritmo calibrado a tu proceso de aplicación.',
+    desc: 'Clases virtuales en vivo con profesor nativo, contenido especializado, ritmo calibrado a tu proceso de aplicación.',
   },
   {
     active: false,

@@ -217,9 +217,9 @@ export default function ContactForm() {
                 margin: 0,
               }}
             >
-              Las plazas son limitadas. Cada estudiante trabaja en sesiones individuales — el número
-              de estudiantes en cada cohorte es pequeño por diseño. Si tienes interés, es mejor
-              iniciar la conversación ahora.
+              Las plazas son limitadas. Cada cohorte es pequeña por diseño — grupos reducidos
+              para garantizar atención real. Si tienes interés, es mejor iniciar la conversación
+              ahora.
             </p>
 
             {/* WhatsApp CTA */}
