@@ -23,8 +23,8 @@ const GLOBAL_STYLES = `
 const CITIES = [
   'Lima', 'Bogotá', 'Santiago', 'Buenos Aires', 'Ciudad de México',
   'Medellín', 'São Paulo', 'Montevideo', 'Quito', 'Cali',
-  'Guadalajara', 'Córdoba', 'Santa Cruz', 'Asunción', 'Caracas',
-  'Barranquilla', 'Rosario', 'Cusco', 'Arequipa', 'Guayaquil',
+  'Guadalajara', 'Córdoba', 'Santa Cruz', 'Rosario', 'Arequipa',
+  'Guayaquil', 'Monterrey', 'Cartagena',
 ];
 
 /* ── City Ticker Strip ───────────────────────────────────── */
