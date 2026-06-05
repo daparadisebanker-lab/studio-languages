@@ -745,10 +745,10 @@ export default function Curriculum() {
         {/* Panels */}
         <div style={{ marginTop: '64px' }}>
           {activeTab === 'italiano' && (
-            <CurriculumPanel data={italianPanel} />
+            <CurriculumPanel data={italianPanel} isMobile={isMobile} />
           )}
           {activeTab === 'frances' && (
-            <CurriculumPanel data={frenchPanel} />
+            <CurriculumPanel data={frenchPanel} isMobile={isMobile} />
           )}
         </div>
       </div>

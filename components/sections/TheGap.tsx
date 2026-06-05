@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { motion, useInView, useMotionValue, animate } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number];
 const BORDER = '1px solid rgba(245,242,236,0.1)';
@@ -82,12 +83,14 @@ const cells = [
 
 /* ── Section ────────────────────────────────────────────── */
 export default function TheGap() {
+  const isMobile = useIsMobile();
+
   return (
-    <section style={{ background: '#2d2b27', padding: '12rem 4rem' }}>
+    <section style={{ background: '#2d2b27', padding: isMobile ? '72px 24px' : '12rem 4rem' }}>
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr',
           borderTop: BORDER,
           borderLeft: BORDER,
         }}
@@ -99,7 +102,7 @@ export default function TheGap() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.9, ease: easeOut, delay: i * 0.15 }}
-            style={{ borderRight: BORDER, borderBottom: BORDER, padding: '4rem 3rem' }}
+            style={{ borderRight: BORDER, borderBottom: BORDER, padding: isMobile ? '2rem 1.5rem' : '4rem 3rem' }}
           >
             {/* Animated number */}
             <div

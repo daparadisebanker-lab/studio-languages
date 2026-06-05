@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -28,19 +29,21 @@ const points = [
 ];
 
 export default function ElPrograma() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       id="programa"
       style={{
         background: '#f5f0e8',
-        padding: '120px 0',
+        padding: isMobile ? '72px 0' : '120px 0',
       }}
     >
       <div
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 64px',
+          padding: isMobile ? '0 24px' : '0 64px',
         }}
       >
         {/* Label */}
@@ -80,8 +83,8 @@ export default function ElPrograma() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '80px',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+            gap: isMobile ? '40px' : '80px',
             marginTop: '80px',
             alignItems: 'start',
           }}
@@ -94,7 +97,7 @@ export default function ElPrograma() {
             transition={{ duration: 1.1, ease: easeOut }}
             style={{
               borderLeft: '2px solid #c4603a',
-              paddingLeft: '32px',
+              paddingLeft: isMobile ? '20px' : '32px',
             }}
           >
             <p

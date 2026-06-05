@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -23,18 +24,20 @@ const cards = [
 ];
 
 export default function Philosophy() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       style={{
         background: '#faf7f2',
-        padding: '120px 0',
+        padding: isMobile ? '72px 0' : '120px 0',
       }}
     >
       <div
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 64px',
+          padding: isMobile ? '0 24px' : '0 64px',
         }}
       >
         {/* Label */}
@@ -95,7 +98,7 @@ export default function Philosophy() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr',
             gap: '2px',
             marginTop: '64px',
           }}
@@ -113,7 +116,7 @@ export default function Philosophy() {
               }}
               style={{
                 background: '#f5f0e8',
-                padding: '48px 40px',
+                padding: isMobile ? '32px 24px' : '48px 40px',
                 position: 'relative',
                 overflow: 'hidden',
               }}

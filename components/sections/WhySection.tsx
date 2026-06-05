@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useIsMobile } from '@/lib/useIsMobile'
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number]
 
@@ -33,20 +34,22 @@ const criteria = [
 ]
 
 export default function WhySection() {
+  const isMobile = useIsMobile()
+
   return (
     <section
       id="para-quien"
       style={{
         background: '#2c2420',
         color: '#f5f0e8',
-        padding: '120px 0',
+        padding: isMobile ? '72px 0' : '120px 0',
       }}
     >
       <div
         style={{
           maxWidth: 1200,
           margin: '0 auto',
-          padding: '0 64px',
+          padding: isMobile ? '0 24px' : '0 64px',
         }}
       >
         {/* Label */}
@@ -113,8 +116,8 @@ export default function WhySection() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 64,
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+            gap: isMobile ? 32 : 64,
             marginTop: 64,
             alignItems: 'start',
           }}
@@ -187,7 +190,7 @@ export default function WhySection() {
 
           {/* Right — Quote box */}
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.8, ease: easeOut, delay: 0.2 }}
@@ -202,7 +205,7 @@ export default function WhySection() {
             <span
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 120,
+                fontSize: isMobile ? 80 : 120,
                 color: '#c4603a',
                 opacity: 0.2,
                 position: 'absolute',

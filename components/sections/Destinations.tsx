@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 const destinations = [
   { name: 'Politecnico di Milano', country: 'Italia' },
@@ -85,11 +86,13 @@ function TickerTrack({ ariaHidden = false }: { ariaHidden?: boolean }) {
 }
 
 export default function Destinations() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       style={{
         background: '#1a1916',
-        padding: '12rem 4rem',
+        padding: isMobile ? '72px 24px' : '12rem 4rem',
         overflow: 'hidden',
       }}
     >
@@ -99,7 +102,7 @@ export default function Destinations() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        style={{ marginBottom: '5rem' }}
+        style={{ marginBottom: isMobile ? '3rem' : '5rem' }}
       >
         {/* Eyebrow */}
         <p

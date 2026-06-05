@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useIsMobile } from '@/lib/useIsMobile'
 
 const easeOut: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
@@ -13,9 +14,10 @@ interface PriceCardProps {
   note: string
   featured: boolean
   index: number
+  isMobile: boolean
 }
 
-function PriceCard({ badge, format, duration, desc, amount, note, featured, index }: PriceCardProps) {
+function PriceCard({ badge, format, duration, desc, amount, note, featured, index, isMobile }: PriceCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -25,7 +27,7 @@ function PriceCard({ badge, format, duration, desc, amount, note, featured, inde
       whileHover={{ y: -4 }}
       style={{
         background: featured ? '#c4603a' : '#ede8df',
-        padding: '44px 36px',
+        padding: isMobile ? '32px 24px' : '44px 36px',
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
@@ -102,7 +104,7 @@ function PriceCard({ badge, format, duration, desc, amount, note, featured, inde
       <p
         style={{
           fontFamily: 'var(--font-display)',
-          fontSize: '40px',
+          fontSize: isMobile ? '32px' : '40px',
           fontWeight: 300,
           color: featured ? '#f5f0e8' : '#1a1410',
           lineHeight: 1,
@@ -130,7 +132,7 @@ function PriceCard({ badge, format, duration, desc, amount, note, featured, inde
   )
 }
 
-const tiers: Omit<PriceCardProps, 'index'>[] = [
+const tiers: Omit<PriceCardProps, 'index' | 'isMobile'>[] = [
   {
     badge: 'Estándar',
     format: 'Programa mensual',
@@ -161,18 +163,20 @@ const tiers: Omit<PriceCardProps, 'index'>[] = [
 ]
 
 export default function Pricing() {
+  const isMobile = useIsMobile()
+
   return (
     <section
       style={{
         background: '#f5f0e8',
-        padding: '120px 0',
+        padding: isMobile ? '72px 0' : '120px 0',
       }}
     >
       <div
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 64px',
+          padding: isMobile ? '0 24px' : '0 64px',
         }}
       >
         {/* Label */}
@@ -239,13 +243,13 @@ export default function Pricing() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
             gap: '2px',
             marginTop: '64px',
           }}
         >
           {tiers.map((tier, i) => (
-            <PriceCard key={tier.badge} {...tier} index={i} />
+            <PriceCard key={tier.badge} {...tier} index={i} isMobile={isMobile} />
           ))}
         </div>
 
