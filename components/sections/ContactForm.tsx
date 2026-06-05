@@ -89,9 +89,13 @@ function FormTextarea({
 function FormSelect({
   value,
   onChange,
+  placeholder,
+  options,
 }: {
   value: string
   onChange: (v: string) => void
+  placeholder: string
+  options: { value: string; label: string }[]
 }) {
   const [focused, setFocused] = useState(false)
 
@@ -115,28 +119,39 @@ function FormSelect({
         borderColor: focused ? 'rgba(245,240,232,0.5)' : 'rgba(245,240,232,0.2)',
       }}
     >
-      <option value="" disabled>
-        — Idioma de interés —
-      </option>
-      <option value="Italiano para el Arte">Italiano para el Arte</option>
-      <option value="Français para el Arte">Français para el Arte</option>
-      <option value="Ambos idiomas">Ambos idiomas</option>
+      <option value="" disabled>{placeholder}</option>
+      {options.map(o => (
+        <option key={o.value} value={o.value}>{o.label}</option>
+      ))}
     </select>
   )
 }
+
+const idiomaOptions = [
+  { value: 'Italiano para el Arte', label: 'Italiano para el Arte' },
+  { value: 'Français para el Arte', label: 'Français para el Arte' },
+  { value: 'Ambos idiomas',         label: 'Ambos idiomas' },
+]
+
+const modalidadOptions = [
+  { value: 'Estándar ($120/mes)',   label: 'Estándar — $120 / mes' },
+  { value: 'Intensivo ($200/mes)',  label: 'Intensivo — $200 / mes' },
+  { value: 'Paquete Admisión ($280)', label: 'Paquete Admisión — $280' },
+]
 
 export default function ContactForm() {
   const isMobile = useIsMobile()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [idioma, setIdioma] = useState('')
+  const [modalidad, setModalidad] = useState('')
   const [institucion, setInstitucion] = useState('')
   const [mensaje, setMensaje] = useState('')
   const [btnHovered, setBtnHovered] = useState(false)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    const text = `Hola,%20me%20llamo%20${encodeURIComponent(name)}%20y%20estoy%20interesado%20en%20el%20programa%20de%20${encodeURIComponent(idioma || 'idiomas')}%20de%20Studio.%20Mi%20institución%20objetivo%20es%20${encodeURIComponent(institucion)}.`
+    const text = `Hola,%20me%20llamo%20${encodeURIComponent(name)}%20y%20estoy%20interesado%20en%20el%20programa%20${encodeURIComponent(modalidad || 'Estándar')}%20de%20${encodeURIComponent(idioma || 'idiomas')}%20de%20Studio.%20Mi%20institución%20objetivo%20es%20${encodeURIComponent(institucion)}.`
     window.open(`https://wa.me/${WA_NUMBER}?text=${text}`, '_blank')
   }
 
@@ -285,7 +300,19 @@ export default function ContactForm() {
                 onChange={setEmail}
               />
 
-              <FormSelect value={idioma} onChange={setIdioma} />
+              <FormSelect
+                value={idioma}
+                onChange={setIdioma}
+                placeholder="— Idioma de interés —"
+                options={idiomaOptions}
+              />
+
+              <FormSelect
+                value={modalidad}
+                onChange={setModalidad}
+                placeholder="— Modalidad —"
+                options={modalidadOptions}
+              />
 
               <FormInput
                 type="text"

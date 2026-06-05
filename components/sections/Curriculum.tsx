@@ -728,9 +728,9 @@ export default function Curriculum() {
         <div
           style={{
             display: 'flex',
-            borderBottom: '1px solid rgba(26,20,16,0.06)',
+            gap: 8,
             marginTop: '56px',
-            overflowX: isMobile ? 'auto' : undefined,
+            marginBottom: '4px',
           }}
         >
           {tabs.map((tab) => {
@@ -743,28 +743,25 @@ export default function Curriculum() {
                   fontFamily: 'var(--font-mono)',
                   fontSize: '11px',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.18em',
-                  padding: isMobile ? '12px 20px' : '16px 36px',
-                  background: 'none',
-                  border: 'none',
-                  borderBottom: isActive
-                    ? '2px solid #c4603a'
-                    : '2px solid transparent',
-                  marginBottom: '-1px',
+                  letterSpacing: '0.15em',
+                  padding: isMobile ? '10px 20px' : '12px 32px',
+                  background: isActive ? '#1a1410' : 'transparent',
+                  border: `1px solid ${isActive ? '#1a1410' : 'rgba(26,20,16,0.2)'}`,
                   cursor: 'pointer',
-                  color: isActive ? '#c4603a' : '#1a1410',
-                  opacity: isActive ? 1 : 0.35,
-                  transition:
-                    'opacity 0.2s ease, color 0.2s ease, border-color 0.2s ease',
+                  color: isActive ? '#f5f0e8' : 'rgba(26,20,16,0.45)',
+                  transition: 'all 0.2s ease',
+                  whiteSpace: 'nowrap',
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    (e.currentTarget as HTMLButtonElement).style.opacity = '0.65';
+                    (e.currentTarget as HTMLButtonElement).style.color = '#1a1410';
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = '#1a1410';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive) {
-                    (e.currentTarget as HTMLButtonElement).style.opacity = '0.35';
+                    (e.currentTarget as HTMLButtonElement).style.color = 'rgba(26,20,16,0.45)';
+                    (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(26,20,16,0.2)';
                   }
                 }}
               >
@@ -773,6 +770,7 @@ export default function Curriculum() {
             );
           })}
         </div>
+        <div style={{ height: 1, background: 'rgba(26,20,16,0.06)', marginBottom: 0 }} />
 
         {/* Panels */}
         <div style={{ marginTop: '64px' }}>
