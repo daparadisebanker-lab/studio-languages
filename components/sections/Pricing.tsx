@@ -156,7 +156,7 @@ const tiers: Omit<PriceCardProps, 'index' | 'isMobile'>[] = [
     format: 'Programa mensual',
     duration: 'Clases virtuales grupales',
     desc: 'Clases en línea con profesor nativo especializado en arte y diseño. Para estudiantes en etapa de preparación con 12+ meses antes de su aplicación.',
-    amount: 'S/ 400',
+    amount: 'S/ 420',
     note: 'por mes · sin matrícula',
     bundle: 'Paquete 5 meses · S/ 1,800',
     featured: false,
