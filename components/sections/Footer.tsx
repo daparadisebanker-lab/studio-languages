@@ -1,5 +1,7 @@
 'use client'
 
+import { useIsMobile } from '@/lib/useIsMobile'
+
 const navLinks = [
   { href: '#programa', label: 'El Programa' },
   { href: '#curriculum', label: 'Curriculum' },
@@ -8,6 +10,8 @@ const navLinks = [
 ]
 
 export default function Footer() {
+  const isMobile = useIsMobile()
+
   return (
     <footer
       style={{
@@ -20,15 +24,17 @@ export default function Footer() {
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 64px',
+          padding: isMobile ? '0 24px' : '0 64px',
         }}
       >
         {/* Top row */}
         <div
           style={{
             display: 'flex',
-            alignItems: 'center',
+            flexDirection: isMobile ? 'column' : 'row',
+            alignItems: isMobile ? 'flex-start' : 'center',
             justifyContent: 'space-between',
+            gap: isMobile ? 24 : 0,
             marginBottom: '32px',
           }}
         >
@@ -50,7 +56,8 @@ export default function Footer() {
           <nav
             style={{
               display: 'flex',
-              gap: '32px',
+              flexWrap: isMobile ? 'wrap' : 'nowrap',
+              gap: isMobile ? '16px' : '32px',
             }}
           >
             {navLinks.map((link) => (
@@ -94,8 +101,10 @@ export default function Footer() {
         <div
           style={{
             display: 'flex',
-            alignItems: 'center',
+            flexDirection: isMobile ? 'column' : 'row',
+            alignItems: isMobile ? 'flex-start' : 'center',
             justifyContent: 'space-between',
+            gap: isMobile ? 12 : 0,
             paddingTop: '24px',
             borderTop: '1px solid rgba(245,240,232,0.06)',
           }}
