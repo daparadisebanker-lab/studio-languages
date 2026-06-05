@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -16,6 +17,7 @@ interface TrackCardProps {
   desc: string;
   schools: School[];
   animDelay?: number;
+  isMobile: boolean;
 }
 
 function TrackCard({
@@ -25,6 +27,7 @@ function TrackCard({
   desc,
   schools,
   animDelay = 0,
+  isMobile,
 }: TrackCardProps) {
   const [hovered, setHovered] = useState(false);
 
@@ -42,7 +45,7 @@ function TrackCard({
           ? 'rgba(245,240,232,0.05)'
           : 'rgba(245,240,232,0.03)',
         border: '1px solid rgba(245,240,232,0.08)',
-        padding: '52px 48px',
+        padding: isMobile ? '36px 24px' : '52px 48px',
         overflow: 'hidden',
         cursor: 'default',
         transition: 'background 0.3s ease',
@@ -80,7 +83,7 @@ function TrackCard({
       <p
         style={{
           fontFamily: 'var(--font-display)',
-          fontSize: '52px',
+          fontSize: isMobile ? '40px' : '52px',
           fontWeight: 300,
           fontStyle: 'italic',
           color: 'rgba(245,240,232,0.9)',
@@ -164,11 +167,13 @@ function TrackCard({
 }
 
 export default function Languages() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       style={{
         background: '#2c2420',
-        padding: '120px 0',
+        padding: isMobile ? '72px 0' : '120px 0',
         color: '#f5f0e8',
       }}
     >
@@ -176,7 +181,7 @@ export default function Languages() {
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
-          padding: '0 64px',
+          padding: isMobile ? '0 24px' : '0 64px',
         }}
       >
         {/* Label */}
@@ -257,8 +262,8 @@ export default function Languages() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '2px',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+            gap: isMobile ? '1px' : '2px',
             marginTop: '64px',
           }}
         >
@@ -275,6 +280,7 @@ export default function Languages() {
               { name: 'Accademia di Belle Arti di Bologna' },
             ]}
             animDelay={0}
+            isMobile={isMobile}
           />
           <TrackCard
             flag="🇫🇷"
@@ -289,6 +295,7 @@ export default function Languages() {
               { name: 'École Nationale Supérieure des Beaux-Arts' },
             ]}
             animDelay={0.12}
+            isMobile={isMobile}
           />
         </div>
       </div>

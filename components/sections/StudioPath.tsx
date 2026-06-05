@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useIsMobile } from '@/lib/useIsMobile'
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number]
 
@@ -43,11 +44,13 @@ const steps = [
 ]
 
 export default function StudioPath() {
+  const isMobile = useIsMobile()
+
   return (
     <section
       style={{
         background: '#f5f0e8',
-        padding: '120px 0',
+        padding: isMobile ? '72px 0' : '120px 0',
         overflow: 'hidden',
       }}
     >
@@ -55,7 +58,7 @@ export default function StudioPath() {
         style={{
           maxWidth: 1200,
           margin: '0 auto',
-          padding: '0 64px',
+          padding: isMobile ? '0 24px' : '0 64px',
         }}
       >
         {/* Label */}
@@ -96,18 +99,20 @@ export default function StudioPath() {
           <em style={{ fontStyle: 'italic', color: '#c4603a' }}>como herramienta.</em>
         </motion.h2>
 
-        {/* 5-step horizontal path */}
+        {/* 5-step path */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(5, 1fr)',
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(5, 1fr)',
+            gap: isMobile ? 24 : 0,
             marginTop: 80,
             position: 'relative',
           }}
         >
-          {/* Connecting line */}
+          {/* Connecting line — desktop only */}
           <div
             style={{
+              display: isMobile ? 'none' : 'block',
               position: 'absolute',
               top: 36,
               left: '10%',
@@ -127,10 +132,10 @@ export default function StudioPath() {
               transition={{ duration: 0.7, ease: easeOut, delay: 0.1 + i * 0.07 }}
               style={{
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                padding: '0 16px',
+                flexDirection: isMobile ? 'row' : 'column',
+                alignItems: isMobile ? 'flex-start' : 'center',
+                textAlign: isMobile ? 'left' : 'center',
+                padding: isMobile ? 0 : '0 16px',
                 position: 'relative',
                 zIndex: 1,
               }}
@@ -145,7 +150,8 @@ export default function StudioPath() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: 20,
+                  marginBottom: isMobile ? 0 : 20,
+                  marginRight: isMobile ? 16 : 0,
                   fontSize: 24,
                   background: step.active ? '#c4603a' : '#ede8df',
                   flexShrink: 0,
@@ -154,51 +160,54 @@ export default function StudioPath() {
                 {step.icon}
               </div>
 
-              {/* Step number */}
-              <p
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: 10,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: step.active ? '#c4603a' : '#6b6860',
-                  marginBottom: 8,
-                  margin: '0 0 8px',
-                }}
-              >
-                {step.number}
-              </p>
+              {/* Text content */}
+              <div>
+                {/* Step number */}
+                <p
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 10,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    color: step.active ? '#c4603a' : '#6b6860',
+                    marginBottom: 8,
+                    margin: '0 0 8px',
+                  }}
+                >
+                  {step.number}
+                </p>
 
-              {/* Step title */}
-              <h3
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 20,
-                  fontWeight: 400,
-                  fontStyle: 'italic',
-                  color: '#1a1410',
-                  lineHeight: 1.2,
-                  marginBottom: 8,
-                  margin: '0 0 8px',
-                }}
-              >
-                {step.title}
-              </h3>
+                {/* Step title */}
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 20,
+                    fontWeight: 400,
+                    fontStyle: 'italic',
+                    color: '#1a1410',
+                    lineHeight: 1.2,
+                    marginBottom: 8,
+                    margin: '0 0 8px',
+                  }}
+                >
+                  {step.title}
+                </h3>
 
-              {/* Step desc */}
-              <p
-                style={{
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 13,
-                  fontWeight: 300,
-                  lineHeight: 1.55,
-                  color: 'rgba(26,20,16,0.55)',
-                  maxWidth: 160,
-                  margin: '0 auto',
-                }}
-              >
-                {step.desc}
-              </p>
+                {/* Step desc */}
+                <p
+                  style={{
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 13,
+                    fontWeight: 300,
+                    lineHeight: 1.55,
+                    color: 'rgba(26,20,16,0.55)',
+                    maxWidth: isMobile ? 'none' : 160,
+                    margin: isMobile ? 0 : '0 auto',
+                  }}
+                >
+                  {step.desc}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>

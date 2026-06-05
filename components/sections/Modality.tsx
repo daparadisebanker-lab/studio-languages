@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { useIsMobile } from '@/lib/useIsMobile'
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number]
 
@@ -28,11 +29,13 @@ function ModalityCard({
   name,
   desc,
   index,
+  isMobile,
 }: {
   icon: string
   name: string
   desc: string
   index: number
+  isMobile: boolean
 }) {
   const [hovered, setHovered] = useState(false)
 
@@ -46,7 +49,7 @@ function ModalityCard({
       onMouseLeave={() => setHovered(false)}
       style={{
         background: '#f5f0e8',
-        padding: '40px 36px',
+        padding: isMobile ? '28px 24px' : '40px 36px',
         borderBottom: hovered ? '2px solid #c4603a' : '2px solid transparent',
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
         transition: 'border-color 0.3s ease, transform 0.3s ease',
@@ -84,18 +87,20 @@ function ModalityCard({
 }
 
 export default function Modality() {
+  const isMobile = useIsMobile()
+
   return (
     <section
       style={{
         background: '#faf7f2',
-        padding: '120px 0',
+        padding: isMobile ? '72px 0' : '120px 0',
       }}
     >
       <div
         style={{
           maxWidth: 1200,
           margin: '0 auto',
-          padding: '0 64px',
+          padding: isMobile ? '0 24px' : '0 64px',
         }}
       >
         {/* Label */}
@@ -160,13 +165,13 @@ export default function Modality() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr 1fr',
             gap: 24,
             marginTop: 64,
           }}
         >
           {cards.map((card, i) => (
-            <ModalityCard key={i} {...card} index={i} />
+            <ModalityCard key={i} {...card} index={i} isMobile={isMobile} />
           ))}
         </div>
       </div>

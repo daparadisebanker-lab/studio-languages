@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState, FormEvent, CSSProperties } from 'react'
+import { useIsMobile } from '@/lib/useIsMobile'
 
 const easeOut = [0.16, 1, 0.3, 1] as [number, number, number, number]
 
@@ -125,6 +126,7 @@ function FormSelect({
 }
 
 export default function ContactForm() {
+  const isMobile = useIsMobile()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [idioma, setIdioma] = useState('')
@@ -144,27 +146,27 @@ export default function ContactForm() {
       style={{
         background: '#2c2420',
         color: '#f5f0e8',
-        padding: '120px 0',
+        padding: isMobile ? '72px 0' : '120px 0',
       }}
     >
       <div
         style={{
           maxWidth: 1200,
           margin: '0 auto',
-          padding: '0 64px',
+          padding: isMobile ? '0 24px' : '0 64px',
         }}
       >
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 80,
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+            gap: isMobile ? 48 : 80,
             alignItems: 'center',
           }}
         >
           {/* Left — Text side */}
           <motion.div
-            initial={{ opacity: 0, x: -32 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : -32 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.8, ease: easeOut }}
@@ -253,7 +255,7 @@ export default function ContactForm() {
 
           {/* Right — Form */}
           <motion.div
-            initial={{ opacity: 0, x: 32 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : 32 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.8, ease: easeOut, delay: 0.1 }}
