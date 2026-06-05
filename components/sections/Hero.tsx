@@ -14,7 +14,142 @@ const GLOBAL_STYLES = `
     0%, 100% { transform: translateX(0); }
     50%       { transform: translateX(-30px); }
   }
+  @keyframes cityTicker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
 `;
+
+const CITIES = [
+  'Lima', 'Bogotá', 'Santiago', 'Buenos Aires', 'Ciudad de México',
+  'Medellín', 'São Paulo', 'Montevideo', 'Quito', 'Cali',
+  'Guadalajara', 'Córdoba', 'La Paz', 'Asunción', 'Caracas',
+  'Barranquilla', 'Rosario', 'Cusco', 'Arequipa', 'Guayaquil',
+];
+
+/* ── City Ticker Strip ───────────────────────────────────── */
+function CityTicker() {
+  const doubled = [...CITIES, ...CITIES];
+  return (
+    <div
+      style={{
+        background: '#1a1410',
+        borderTop: '1px solid rgba(245,240,232,0.06)',
+        display: 'flex',
+        alignItems: 'center',
+        height: 52,
+        overflow: 'hidden',
+        position: 'relative',
+      }}
+    >
+      {/* Static label */}
+      <div
+        style={{
+          flexShrink: 0,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 16,
+          padding: '0 24px 0 32px',
+          borderRight: '1px solid rgba(245,240,232,0.1)',
+          height: '100%',
+          background: '#1a1410',
+          zIndex: 2,
+          whiteSpace: 'nowrap',
+        }}
+      >
+        <span
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 9,
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            color: 'rgba(245,240,232,0.35)',
+          }}
+        >
+          Para creativos ambiciosos en
+        </span>
+      </div>
+
+      {/* Scrolling cities */}
+      <div
+        style={{
+          flex: 1,
+          overflow: 'hidden',
+          position: 'relative',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        {/* Left fade mask */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: 48,
+            background: 'linear-gradient(to right, #1a1410, transparent)',
+            zIndex: 1,
+            pointerEvents: 'none',
+          }}
+        />
+        {/* Right fade mask */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: 48,
+            background: 'linear-gradient(to left, #1a1410, transparent)',
+            zIndex: 1,
+            pointerEvents: 'none',
+          }}
+        />
+
+        <div
+          aria-hidden="true"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 0,
+            animation: 'cityTicker 55s linear infinite',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {doubled.map((city, i) => (
+            <span key={i} style={{ display: 'inline-flex', alignItems: 'center' }}>
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 10,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  color: 'rgba(245,240,232,0.65)',
+                  padding: '0 28px',
+                }}
+              >
+                {city}
+              </span>
+              <span
+                style={{
+                  color: '#c4603a',
+                  fontSize: 8,
+                  opacity: 0.6,
+                }}
+              >
+                ·
+              </span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* ── Fade-up variant ──────────────────────────────────────── */
 const fadeUp = (delay: number) => ({
@@ -414,6 +549,9 @@ export default function Hero() {
           </div>
         </div>
       </section>
+
+      {/* ── City Ticker ── */}
+      <CityTicker />
     </>
   );
 }
