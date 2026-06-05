@@ -1,8 +1,40 @@
 'use client';
 
+import React from 'react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useIsMobile } from '@/lib/useIsMobile';
+
+/* ── Skill icons — stroke SVGs, terra on smoke ─────────── */
+const IconFeather = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c4603a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+    <line x1="16" y1="8" x2="2" y2="22"/>
+    <line x1="17" y1="15" x2="9" y2="15"/>
+  </svg>
+)
+const IconMic = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c4603a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="9" y="2" width="6" height="11" rx="3"/>
+    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+    <line x1="12" y1="19" x2="12" y2="22"/>
+    <line x1="8" y1="22" x2="16" y2="22"/>
+  </svg>
+)
+const IconFileText = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c4603a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="16" y1="13" x2="8" y2="13"/>
+    <line x1="16" y1="17" x2="8" y2="17"/>
+  </svg>
+)
+const IconSearch = () => (
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#c4603a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8"/>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </svg>
+)
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -17,7 +49,7 @@ interface Module {
 }
 
 interface AppSkill {
-  icon: string;
+  icon: React.ReactNode;
   name: string;
   desc: string;
 }
@@ -136,22 +168,22 @@ const italianPanel: PanelData = {
   ],
   skills: [
     {
-      icon: '✍️',
+      icon: <IconFeather />,
       name: 'Artist Statement',
       desc: 'Redacción de declaración artística en italiano con vocabulario de práctica contemporánea real.',
     },
     {
-      icon: '🎤',
+      icon: <IconMic />,
       name: 'Entrevista de Portafolio',
       desc: 'Conducir una revisión de portafolio y defender decisiones creativas ante un jurado italiano.',
     },
     {
-      icon: '📝',
+      icon: <IconFileText />,
       name: 'Carta de Motivación',
       desc: 'Escritura de motivation letter institucional calibrada al tono de NABA, Domus y IED.',
     },
     {
-      icon: '🔍',
+      icon: <IconSearch />,
       name: 'Crítica de Obra',
       desc: 'Análisis escrito y oral de obra artística y de diseño usando el vocabulario crítico italiano.',
     },
@@ -274,22 +306,22 @@ const frenchPanel: PanelData = {
   ],
   skills: [
     {
-      icon: '✍️',
+      icon: <IconFeather />,
       name: 'Note d\'intention',
       desc: 'Redacción de declaración artística y nota de intención en francés con vocabulario de práctica contemporánea.',
     },
     {
-      icon: '🎤',
+      icon: <IconMic />,
       name: 'Entretien d\'admission',
       desc: 'Conducir una revisión de portafolio y defender decisiones creativas ante un jurado de una grande école.',
     },
     {
-      icon: '📝',
+      icon: <IconFileText />,
       name: 'Lettre de motivation',
       desc: 'Escritura de carta de motivación institucional calibrada al tono de ÉCAL, HEAD y ENSAD.',
     },
     {
-      icon: '🔍',
+      icon: <IconSearch />,
       name: 'Critique d\'œuvre',
       desc: 'Análisis escrito y oral de obra artística usando el vocabulario crítico de la tradición francesa.',
     },
@@ -517,7 +549,7 @@ function CurriculumPanel({ data, isMobile }: { data: PanelData; isMobile: boolea
               key={skill.name}
               style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
             >
-              <span style={{ fontSize: '22px' }}>{skill.icon}</span>
+              <div style={{ marginBottom: 4 }}>{skill.icon}</div>
               <span
                 style={{
                   fontFamily: 'var(--font-display)',
