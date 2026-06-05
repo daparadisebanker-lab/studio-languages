@@ -14,7 +14,7 @@ const WHATSAPP_SVG_PATH =
 const selectArrowUri = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(245,240,232,0.5)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`
 
 const inputBase: CSSProperties = {
-  background: 'rgba(245,240,232,0.1)',
+  backgroundColor: 'rgba(245,240,232,0.1)',
   border: '1px solid rgba(245,240,232,0.2)',
   padding: '16px 20px',
   color: '#f5f0e8',
@@ -24,7 +24,7 @@ const inputBase: CSSProperties = {
   width: '100%',
   outline: 'none',
   boxSizing: 'border-box',
-  transition: 'border-color 0.2s ease, background 0.2s ease',
+  transition: 'border-color 0.2s ease, background-color 0.2s ease',
 }
 
 function FormInput({
@@ -51,7 +51,7 @@ function FormInput({
       style={{
         ...inputBase,
         borderColor: focused ? 'rgba(245,240,232,0.5)' : 'rgba(245,240,232,0.2)',
-        background: focused ? 'rgba(245,240,232,0.15)' : 'rgba(245,240,232,0.1)',
+        backgroundColor: focused ? 'rgba(245,240,232,0.15)' : 'rgba(245,240,232,0.1)',
       }}
     />
   )
@@ -79,7 +79,7 @@ function FormTextarea({
       style={{
         ...inputBase,
         borderColor: focused ? 'rgba(245,240,232,0.5)' : 'rgba(245,240,232,0.2)',
-        background: focused ? 'rgba(245,240,232,0.15)' : 'rgba(245,240,232,0.1)',
+        backgroundColor: focused ? 'rgba(245,240,232,0.15)' : 'rgba(245,240,232,0.1)',
         resize: 'vertical',
       }}
     />
@@ -105,6 +105,7 @@ function FormSelect({
         ...inputBase,
         appearance: 'none',
         WebkitAppearance: 'none',
+        backgroundColor: focused ? 'rgba(245,240,232,0.15)' : 'rgba(245,240,232,0.1)',
         backgroundImage: selectArrowUri,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'right 20px center',
@@ -112,7 +113,6 @@ function FormSelect({
         paddingRight: 48,
         cursor: 'pointer',
         borderColor: focused ? 'rgba(245,240,232,0.5)' : 'rgba(245,240,232,0.2)',
-        background: `${focused ? 'rgba(245,240,232,0.15)' : 'rgba(245,240,232,0.1)'} ${selectArrowUri} no-repeat right 20px center / 12px 8px`,
       }}
     >
       <option value="" disabled>
