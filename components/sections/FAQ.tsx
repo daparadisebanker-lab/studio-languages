@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 const faqs = [
   {
@@ -14,7 +15,7 @@ const faqs = [
   },
   {
     q: '¿Las clases son presenciales o virtuales?',
-    a: 'Actualmente operamos en modalidad virtual sincrónica — sesiones 1 a 1 por videollamada con el profesor asignado. Esto permite flexibilidad de horario sin sacrificar la intensidad del acompañamiento.',
+    a: 'Las clases son virtuales sincrónicas — sesiones grupales en vivo por videollamada con el profesor asignado. Esto permite flexibilidad de horario y acceso desde cualquier ciudad sin sacrificar la calidad del contenido.',
   },
   {
     q: '¿Cómo sé si elegir italiano o francés?',
@@ -34,7 +35,7 @@ const faqs = [
   },
 ];
 
-function AccordionItem({ q, a }: { q: string; a: string }) {
+function AccordionItem({ q, a, isMobile }: { q: string; a: string; isMobile: boolean }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -50,8 +51,8 @@ function AccordionItem({ q, a }: { q: string; a: string }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '2rem',
-          padding: '2rem 0',
+          gap: '1.25rem',
+          padding: isMobile ? '1.25rem 0' : '2rem 0',
           background: 'none',
           border: 'none',
           cursor: 'pointer',
@@ -61,7 +62,7 @@ function AccordionItem({ q, a }: { q: string; a: string }) {
         <span
           style={{
             fontFamily: 'var(--font-display)',
-            fontSize: '1.3rem',
+            fontSize: isMobile ? '1.05rem' : '1.3rem',
             fontWeight: 400,
             lineHeight: 1.3,
             color: '#f5f2ec',
@@ -119,18 +120,20 @@ function AccordionItem({ q, a }: { q: string; a: string }) {
 }
 
 export default function FAQ() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       style={{
         background: '#1a1916',
-        padding: '12rem 4rem',
+        padding: isMobile ? '72px 24px' : '12rem 4rem',
       }}
     >
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 2fr',
-          gap: '6rem',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 2fr',
+          gap: isMobile ? '48px' : '6rem',
           alignItems: 'start',
         }}
       >
@@ -141,7 +144,7 @@ export default function FAQ() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            position: 'sticky',
+            position: isMobile ? 'static' : 'sticky',
             top: '8rem',
           }}
         >
@@ -197,7 +200,7 @@ export default function FAQ() {
             }}
           >
             {faqs.map((faq, i) => (
-              <AccordionItem key={i} q={faq.q} a={faq.a} />
+              <AccordionItem key={i} q={faq.q} a={faq.a} isMobile={isMobile} />
             ))}
           </div>
         </div>

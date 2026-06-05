@@ -38,19 +38,13 @@ export default function Footer() {
             marginBottom: '32px',
           }}
         >
-          {/* Brand */}
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '11px',
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: 'rgba(245,240,232,0.4)',
-            }}
-          >
-            Paradise{' '}
-            <span style={{ color: '#c4603a' }}>Studio</span>
-          </span>
+          {/* Brand logo */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo-footer.png"
+            alt="Studio by Paradise"
+            style={{ height: 40, width: 'auto', display: 'block', filter: 'brightness(0) invert(1)', opacity: 0.6 }}
+          />
 
           {/* Nav links */}
           <nav
@@ -86,15 +80,22 @@ export default function Footer() {
           </nav>
 
           {/* External contact */}
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '10px',
-              color: 'rgba(245,240,232,0.3)',
-            }}
-          >
-            studio.paradise.edu.pe
-          </span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: isMobile ? 'flex-start' : 'flex-end' }}>
+            <a
+              href="mailto:studio_paradise@icloud.com"
+              style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(245,240,232,0.3)', textDecoration: 'none' }}
+            >
+              studio_paradise@icloud.com
+            </a>
+            <a
+              href="https://studiobyparadise.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(245,240,232,0.3)', textDecoration: 'none' }}
+            >
+              studiobyparadise.com
+            </a>
+          </div>
         </div>
 
         {/* Bottom row */}
@@ -118,7 +119,7 @@ export default function Footer() {
               color: 'rgba(245,240,232,0.2)',
             }}
           >
-            © 2026 Paradise Education Group · Lima, Perú
+            © 2026 Studio by Paradise · Lima, Perú
           </span>
 
           <span

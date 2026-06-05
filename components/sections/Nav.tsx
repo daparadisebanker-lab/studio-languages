@@ -37,16 +37,13 @@ export default function Nav() {
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: isMobile ? '10px' : '11px',
-          letterSpacing: '0.2em',
-          textTransform: 'uppercase',
-          color: '#1a1410',
-        }}
       >
-        Paradise{' '}
-        <span style={{ color: '#c4603a' }}>Studio</span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/logo-header.png"
+          alt="Studio by Paradise"
+          style={{ height: isMobile ? 26 : 34, width: 'auto', display: 'block' }}
+        />
       </motion.div>
 
       <motion.a

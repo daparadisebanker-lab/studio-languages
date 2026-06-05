@@ -222,7 +222,7 @@ export default function ContactForm() {
               iniciar la conversación ahora.
             </p>
 
-            {/* WhatsApp link */}
+            {/* WhatsApp CTA */}
             <a
               href={`https://wa.me/${WA_NUMBER}?text=Hola,%20quisiera%20informaci%C3%B3n%20sobre%20el%20programa%20de%20idiomas%20de%20Studio`}
               target="_blank"
@@ -232,24 +232,27 @@ export default function ContactForm() {
                 alignItems: 'center',
                 gap: 12,
                 marginTop: 32,
+                padding: '14px 24px',
+                background: '#25D366',
                 fontFamily: 'var(--font-body)',
-                fontSize: 15,
-                fontWeight: 300,
-                color: 'rgba(245,240,232,0.5)',
+                fontSize: 14,
+                fontWeight: 500,
+                color: '#fff',
                 textDecoration: 'none',
+                borderRadius: 4,
               }}
             >
               <svg
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
-                fill="rgba(245,240,232,0.5)"
+                fill="#fff"
                 xmlns="http://www.w3.org/2000/svg"
                 style={{ flexShrink: 0 }}
               >
                 <path d={WHATSAPP_SVG_PATH} />
               </svg>
-              o escríbenos directamente por WhatsApp
+              Escribir por WhatsApp
             </a>
           </motion.div>
 
