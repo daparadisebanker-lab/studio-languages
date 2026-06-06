@@ -575,27 +575,6 @@ export default function Pricing() {
           ))}
         </div>
 
-        {/* Below-grid note */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: easeOut, delay: 0.4 }}
-          style={{
-            marginTop: '48px',
-            textAlign: 'center',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '10px',
-            textTransform: 'uppercase',
-            letterSpacing: '0.12em',
-            color: '#6b6860',
-          }}
-        >
-          Becas disponibles para casos excepcionales ·{' '}
-          <a href="#inscripcion" style={{ color: '#c4603a', textDecoration: 'none' }}>
-            Consultar →
-          </a>
-        </motion.p>
       </div>
     </section>
     </>
