@@ -2,7 +2,6 @@ import Cursor from '@/components/ui/Cursor'
 import Nav from '@/components/sections/Nav'
 import Hero from '@/components/sections/Hero'
 import Manifesto from '@/components/sections/Manifesto'
-import TheGap from '@/components/sections/TheGap'
 import ElPrograma from '@/components/sections/ElPrograma'
 import Languages from '@/components/sections/Languages'
 import Curriculum from '@/components/sections/Curriculum'
@@ -24,7 +23,6 @@ export default function Home() {
       <main>
         <Hero />
         <Manifesto />
-        <TheGap />
         <ElPrograma />
         <Languages />
         <Curriculum />
