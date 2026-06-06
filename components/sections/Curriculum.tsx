@@ -641,9 +641,9 @@ export default function Curriculum() {
   const [activeTab, setActiveTab] = useState<Tab>('italiano');
   const isMobile = useIsMobile();
 
-  const tabs: { id: Tab; label: string }[] = [
-    { id: 'italiano', label: '🇮🇹  Italiano' },
-    { id: 'frances', label: '🇫🇷  Français' },
+  const tabs: { id: Tab; label: string; stripes: [string, string, string] }[] = [
+    { id: 'italiano', label: 'Italiano', stripes: ['#009246', '#c2bfb9', '#CE2B37'] },
+    { id: 'frances',  label: 'Français', stripes: ['#002395', '#c2bfb9', '#ED2939'] },
   ];
 
   return (
@@ -740,6 +740,9 @@ export default function Curriculum() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 12,
                   fontFamily: 'var(--font-mono)',
                   fontSize: '11px',
                   textTransform: 'uppercase',
@@ -765,6 +768,22 @@ export default function Curriculum() {
                   }
                 }}
               >
+                {/* Three-stripe flag */}
+                <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  {tab.stripes.map((c, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        width: 14,
+                        height: 2,
+                        background: isActive ? c.replace('rgba(245,240,232,0.45)', 'rgba(245,240,232,0.6)') : c,
+                        display: 'block',
+                        borderRadius: 1,
+                        opacity: isActive ? 1 : 0.65,
+                      }}
+                    />
+                  ))}
+                </span>
                 {tab.label}
               </button>
             );

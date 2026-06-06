@@ -158,16 +158,33 @@ const fadeUp = (delay: number) => ({
   transition: { duration: 0.8, delay, ease: [0.25, 0.1, 0.25, 1] as const },
 });
 
+/* ── Flag stripes ────────────────────────────────────────── */
+const STRIPE_COLORS: Record<string, [string, string, string]> = {
+  it: ['#009246', 'rgba(245,240,232,0.55)', '#CE2B37'],
+  fr: ['#002395', 'rgba(245,240,232,0.55)', '#ED2939'],
+}
+
+function FlagStripes({ lang, width = 22, height = 3, gap = 3 }: { lang: 'it' | 'fr'; width?: number; height?: number; gap?: number }) {
+  const [c1, c2, c3] = STRIPE_COLORS[lang]
+  return (
+    <span style={{ display: 'flex', flexDirection: 'column', gap, flexShrink: 0 }}>
+      {[c1, c2, c3].map((c, i) => (
+        <span key={i} style={{ width, height, background: c, display: 'block', borderRadius: 1 }} />
+      ))}
+    </span>
+  )
+}
+
 /* ── Language Card ───────────────────────────────────────── */
 interface CardProps {
-  flag: string;
+  lang: 'it' | 'fr';
   name: string;
   targets: string;
   schools: string;
   delay: number;
 }
 
-function LanguageCard({ flag, name, targets, schools, delay }: CardProps) {
+function LanguageCard({ lang, name, targets, schools, delay }: CardProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -192,17 +209,10 @@ function LanguageCard({ flag, name, targets, schools, delay }: CardProps) {
         cursor: 'default',
       }}
     >
-      {/* Flag */}
-      <span
-        style={{
-          fontSize: 30,
-          flexShrink: 0,
-          marginTop: 2,
-          lineHeight: 1,
-        }}
-      >
-        {flag}
-      </span>
+      {/* Flag stripes */}
+      <div style={{ marginTop: 4, flexShrink: 0 }}>
+        <FlagStripes lang={lang} />
+      </div>
 
       {/* Text block */}
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -533,14 +543,14 @@ export default function Hero() {
             }}
           >
             <LanguageCard
-              flag="🇮🇹"
+              lang="it"
               name="Italiano"
               targets="Arte · Diseño · Arquitectura"
               schools="NABA · Domus Academy · IED · Politecnico di Milano"
               delay={0.7}
             />
             <LanguageCard
-              flag="🇫🇷"
+              lang="fr"
               name="Français"
               targets="Arte · Moda · Fotografía"
               schools="ÉCAL · HEAD Genève · École des Beaux-Arts · ENSAD"

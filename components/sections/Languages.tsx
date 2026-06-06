@@ -10,6 +10,11 @@ interface School {
   name: string;
 }
 
+const STRIPE_DARK: Record<string, [string, string, string]> = {
+  '🇮🇹': ['#009246', 'rgba(245,240,232,0.45)', '#CE2B37'],
+  '🇫🇷': ['#002395', 'rgba(245,240,232,0.45)', '#ED2939'],
+}
+
 interface TrackCardProps {
   flag: string;
   langName: string;
@@ -67,17 +72,12 @@ function TrackCard({
         }}
       />
 
-      {/* Flag */}
-      <span
-        style={{
-          fontSize: '48px',
-          marginBottom: '20px',
-          display: 'block',
-          lineHeight: 1,
-        }}
-      >
-        {flag}
-      </span>
+      {/* Flag stripes */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginBottom: '24px', width: 36 }}>
+        {(STRIPE_DARK[flag] ?? STRIPE_DARK['🇮🇹']).map((c, i) => (
+          <span key={i} style={{ height: 4, background: c, display: 'block', borderRadius: 1 }} />
+        ))}
+      </div>
 
       {/* Language name */}
       <p
