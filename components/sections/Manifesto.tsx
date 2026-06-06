@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
+import { useIsMobile } from '@/lib/useIsMobile';
 
 /* ── Word token definition ───────────────────────────────── */
 interface Token {
@@ -71,6 +72,7 @@ function RevealWord({
 /* ── Section ─────────────────────────────────────────────── */
 export default function Manifesto() {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: wrapperRef,
@@ -82,7 +84,7 @@ export default function Manifesto() {
       ref={wrapperRef}
       style={{
         background: '#1a1916',
-        padding: '14rem 4rem',
+        padding: isMobile ? '72px 24px' : '8rem 4rem',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -113,21 +115,21 @@ export default function Manifesto() {
           letterSpacing: '0.22em',
           textTransform: 'uppercase',
           color: '#c8451a',
-          marginBottom: '3rem',
+          marginBottom: '2rem',
         }}
       >
-        Lima, Perú · 2026
+        América Latina · 2026
       </motion.p>
 
-      {/* Scroll-reveal headline — each word lights up as you scroll */}
+      {/* Scroll-reveal headline */}
       <h1
         style={{
           fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(3.2rem, 7vw, 7.5rem)',
+          fontSize: isMobile ? 'clamp(2.4rem, 9vw, 3.6rem)' : 'clamp(2.8rem, 5vw, 5.5rem)',
           fontWeight: 300,
-          lineHeight: 1.08,
+          lineHeight: 1.1,
           letterSpacing: '-0.02em',
-          maxWidth: '1100px',
+          maxWidth: '900px',
           color: '#f5f2ec',
         }}
       >
@@ -141,52 +143,28 @@ export default function Manifesto() {
         ))}
       </h1>
 
-      {/* Body copy */}
-      <div
+      {/* Body copy — single condensed paragraph */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.9, delay: 0.1 }}
         style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: '4rem',
-          maxWidth: '900px',
-          marginTop: '5rem',
+          fontFamily: 'var(--font-body)',
+          fontSize: '1rem',
+          fontWeight: 300,
+          lineHeight: 1.75,
+          color: 'rgba(245,242,236,0.6)',
+          maxWidth: '560px',
+          marginTop: '2.5rem',
         }}
       >
-        {[
-          <>
-            Las familias cuyos hijos son genuinamente talentosos en arte, diseño,
-            arquitectura y cine no tienen a dónde enviarlos para prepararse
-            rigurosamente para las instituciones que importan:{' '}
-            <strong style={{ color: '#f5f2ec', fontWeight: 400 }}>
-              la RCA, Central Saint Martins, NABA, Domus Academy, ÉCAL.
-            </strong>
-          </>,
-          <>
-            No porque el talento no exista. Sino porque{' '}
-            <strong style={{ color: '#f5f2ec', fontWeight: 400 }}>
-              la infraestructura de preparación no existe.
-            </strong>{' '}
-            Studio es la primera institución creativa pre-universitaria de la región
-            construida específicamente para cerrar esa brecha.
-          </>,
-        ].map((content, i) => (
-          <motion.p
-            key={i}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.9, delay: i * 0.15 }}
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: '1.05rem',
-              fontWeight: 300,
-              lineHeight: 1.8,
-              color: 'rgba(245,242,236,0.65)',
-            }}
-          >
-            {content}
-          </motion.p>
-        ))}
-      </div>
+        El talento existe. Lo que falta es la preparación específica para llegar a{' '}
+        <strong style={{ color: '#f5f2ec', fontWeight: 400 }}>
+          la RCA, Central Saint Martins, NABA, ÉCAL.
+        </strong>{' '}
+        Studio existe para cerrar esa brecha.
+      </motion.p>
     </section>
   );
 }

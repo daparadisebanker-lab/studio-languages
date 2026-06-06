@@ -119,7 +119,7 @@ export default function Footer() {
               color: 'rgba(245,240,232,0.2)',
             }}
           >
-            © 2026 Studio by Paradise · Lima, Perú
+            © 2026 Studio by Paradise
           </span>
 
           <span

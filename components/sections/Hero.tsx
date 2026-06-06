@@ -386,7 +386,7 @@ export default function Hero() {
                 color: '#c4603a',
               }}
             >
-              Lima, Perú · Programa 2026
+              América Latina · Programa 2026
             </span>
           </motion.div>
 

@@ -178,7 +178,7 @@ export default function Contact() {
             margin: 0,
           }}
         >
-          studiobyparadise.com · Lima, Perú
+          studiobyparadise.com
         </motion.p>
       </div>
     </section>
