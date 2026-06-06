@@ -54,12 +54,21 @@ interface AppSkill {
   desc: string;
 }
 
+type RefType = 'Libro' | 'Revista' | 'Institución' | 'Archivo' | 'Evento';
+
+interface Reference {
+  type: RefType;
+  author: string;
+  title: string;
+  desc: string;
+}
+
 interface PanelData {
   introLeft: React.ReactNode;
   introRight: string;
   modules: Module[];
   skills: AppSkill[];
-  references: string[];
+  references: Reference[];
 }
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -189,16 +198,16 @@ const italianPanel: PanelData = {
     },
   ],
   references: [
-    'Rivista Domus',
-    'Gio Ponti — L\'architettura è un cristallo',
-    'Ettore Sottsass — Scritti',
-    'Memphis: The New International Style',
-    'Bruno Munari — Da cosa nasce cosa',
-    'Achille Castiglioni — Design!',
-    'Arte povera (Germano Celant, ed.)',
-    'Massimo Vignelli — The Vignelli Canon',
-    'Fondazione Prada — Pubblicazioni',
-    'Salone del Mobile — Milano',
+    { type: 'Revista',     author: 'Gio Ponti, fund.',   title: 'Rivista Domus',                 desc: 'La publicación fundacional del diseño italiano desde 1928. Vocabulario visual obligatorio.' },
+    { type: 'Libro',       author: 'Gio Ponti',           title: "L'architettura è un cristallo", desc: 'El manifiesto formal del diseño moderno italiano. Lectura en Politecnico di Milano.' },
+    { type: 'Libro',       author: 'Ettore Sottsass',     title: 'Scritti',                       desc: 'Escritos del fundador del Memphis Group sobre forma, cultura y provocación material.' },
+    { type: 'Libro',       author: 'Barbara Radice',      title: 'Memphis: The New International Style', desc: 'El documento visual del movimiento que redefinió el diseño postmoderno.' },
+    { type: 'Libro',       author: 'Bruno Munari',        title: 'Da cosa nasce cosa',            desc: 'El texto esencial sobre proceso creativo. Referencia directa en IED y NABA.' },
+    { type: 'Libro',       author: 'Achille Castiglioni', title: 'Design!',                       desc: 'El maestro del diseño industrial italiano sobre ingenuidad, función y forma.' },
+    { type: 'Libro',       author: 'Germano Celant, ed.', title: 'Arte Povera',                   desc: 'El documento fundador del movimiento artístico italiano más influyente del siglo XX.' },
+    { type: 'Libro',       author: 'Massimo Vignelli',    title: 'The Vignelli Canon',            desc: 'El tratado de diseño gráfico del maestro del sistema visual italiano.' },
+    { type: 'Archivo',     author: 'Fondazione Prada',    title: 'Pubblicazioni',                 desc: 'El archivo editorial de la institución que define el arte contemporáneo en Italia.' },
+    { type: 'Evento',      author: 'Milano, anual',       title: 'Salone del Mobile',             desc: 'La feria de diseño más importante del mundo. Punto de referencia cultural obligatorio.' },
   ],
 };
 
@@ -327,16 +336,16 @@ const frenchPanel: PanelData = {
     },
   ],
   references: [
-    'Roland Barthes — La Chambre Claire',
-    'Guy Debord — La Société du Spectacle',
-    'Nicolas Bourriaud — Esthétique relationnelle',
-    'Müller-Brockmann — Grid Systems',
-    'Emil Ruder — Typography',
-    'HEAD Genève — Annuaire étudiant',
-    'ÉCAL — Catalog',
-    'Institut Français de la Mode',
-    'Maison Margiela Archives',
-    'Art Basel Genève',
+    { type: 'Libro',       author: 'Roland Barthes',        title: 'La Chambre Claire',           desc: 'El ensayo definitivo sobre fotografía e imagen. Texto de referencia en ÉCAL y HEAD.' },
+    { type: 'Libro',       author: 'Guy Debord',            title: 'La Société du Spectacle',     desc: 'El texto situacionista que fundamenta la crítica visual contemporánea.' },
+    { type: 'Libro',       author: 'Nicolas Bourriaud',     title: 'Esthétique relationnelle',    desc: 'El marco teórico del arte relacional. Referencia directa en ENSAD y las grandes écoles.' },
+    { type: 'Libro',       author: 'Josef Müller-Brockmann',title: 'Grid Systems',                desc: 'El sistema de grilla suizo que fundamenta la pedagogía de diseño en ÉCAL.' },
+    { type: 'Libro',       author: 'Emil Ruder',            title: 'Typography',                  desc: 'La biblia de la tipografía internacional suiza. Texto fundacional en HEAD Genève.' },
+    { type: 'Institución', author: 'HEAD Genève',           title: 'Annuaire étudiant',           desc: 'El archivo anual del trabajo estudiantil. Muestra con exactitud lo que la escuela espera.' },
+    { type: 'Institución', author: 'ÉCAL Lausanne',         title: 'Catálogo de programas',       desc: 'Documenta el método pedagógico y el perfil exacto del estudiante que ÉCAL admite.' },
+    { type: 'Institución', author: 'IFM Paris',             title: 'Institut Français de la Mode',desc: 'La institución de referencia para moda conceptual en el sistema educativo francés.' },
+    { type: 'Archivo',     author: 'Maison Margiela',       title: 'Archives',                    desc: 'El archivo del diseñador que redefinió la moda como discurso conceptual e intelectual.' },
+    { type: 'Evento',      author: 'Art Basel, anual',      title: 'Art Basel Genève',            desc: 'La feria más importante del arte contemporáneo. Eje del sistema de arte suizo-francés.' },
   ],
 };
 
@@ -577,14 +586,8 @@ function CurriculumPanel({ data, isMobile }: { data: PanelData; isMobile: boolea
         </div>
       </div>
 
-      {/* References row */}
-      <div
-        style={{
-          paddingTop: '40px',
-          borderTop: '1px solid rgba(26,20,16,0.06)',
-          marginTop: '48px',
-        }}
-      >
+      {/* References grid */}
+      <div style={{ marginTop: '48px' }}>
         <p
           style={{
             fontFamily: 'var(--font-mono)',
@@ -592,14 +595,20 @@ function CurriculumPanel({ data, isMobile }: { data: PanelData; isMobile: boolea
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
             color: '#c4603a',
-            marginBottom: '20px',
+            marginBottom: '16px',
           }}
         >
           Lecturas de referencia
         </p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: isMobile ? '6px' : '10px' }}>
-          {data.references.map((ref) => (
-            <ReferenceItem key={ref} label={ref} />
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(5, 1fr)',
+            gap: '2px',
+          }}
+        >
+          {data.references.map((item) => (
+            <ReferenceCard key={item.title} item={item} />
           ))}
         </div>
       </div>
@@ -607,29 +616,72 @@ function CurriculumPanel({ data, isMobile }: { data: PanelData; isMobile: boolea
   );
 }
 
-function ReferenceItem({ label }: { label: string }) {
-  const [hovered, setHovered] = useState(false);
+const TYPE_COLOR: Record<RefType, string> = {
+  'Libro':       '#c4603a',
+  'Revista':     '#1a1410',
+  'Institución': '#3a6658',
+  'Archivo':     '#5a4e3a',
+  'Evento':      '#3a4a6e',
+}
 
+function ReferenceCard({ item }: { item: Reference }) {
   return (
-    <span
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <div
       style={{
-        fontFamily: 'var(--font-display)',
-        fontSize: '16px',
-        fontStyle: 'italic',
-        color: '#1a1410',
-        opacity: hovered ? 0.9 : 0.5,
-        padding: '6px 16px',
-        border: hovered
-          ? '1px solid #c4603a'
-          : '1px solid rgba(26,20,16,0.06)',
-        transition: 'opacity 0.2s ease, border-color 0.2s ease',
-        cursor: 'default',
+        background: '#e8e3da',
+        padding: '20px 18px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 7,
       }}
     >
-      {label}
-    </span>
+      <span
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: '8px',
+          letterSpacing: '0.22em',
+          textTransform: 'uppercase',
+          color: TYPE_COLOR[item.type],
+        }}
+      >
+        {item.type}
+      </span>
+      <span
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: '9px',
+          letterSpacing: '0.04em',
+          color: 'rgba(26,20,16,0.42)',
+        }}
+      >
+        {item.author}
+      </span>
+      <p
+        style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: '15px',
+          fontWeight: 300,
+          fontStyle: 'italic',
+          color: '#1a1410',
+          margin: 0,
+          lineHeight: 1.25,
+        }}
+      >
+        {item.title}
+      </p>
+      <p
+        style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: '12px',
+          fontWeight: 300,
+          lineHeight: 1.55,
+          color: 'rgba(26,20,16,0.52)',
+          margin: 0,
+        }}
+      >
+        {item.desc}
+      </p>
+    </div>
   );
 }
 

@@ -14,7 +14,7 @@ const criteria = [
   {
     strong: 'Tu lista de instituciones objetivo está definida',
     normal:
-      'Ya investigaste a NABA, ÉCAL, Politecnico o HEAD. Sabes que estas escuelas exigen el idioma. Necesitas un programa que te lleve ahí.',
+      'Ya investigaste a NABA, ÉCAL, Politecnico o HEAD. Muchos programas tienen track en inglés — pero sabes que la diferencia entre asistir y realmente pertenecer pasa por el idioma.',
   },
   {
     strong: 'Estás a 1–3 años de aplicar',
@@ -24,7 +24,7 @@ const criteria = [
   {
     strong: 'Quieres más que gramática',
     normal:
-      'Entiendes que el idioma es la puerta al mundo cultural al que quieres pertenecer — no solo un requisito de admisión que cumplir.',
+      'Entiendes que el idioma es acceso al mundo cultural al que quieres pertenecer — las críticas, los tutores, la ciudad, la industria. No es un casillero. Es una herramienta de carrera.',
   },
   {
     strong: 'Puedes comprometerte con un programa serio',
@@ -228,13 +228,28 @@ export default function WhySection() {
                 fontStyle: 'italic',
                 color: 'rgba(245,240,232,0.85)',
                 lineHeight: 1.45,
-                marginBottom: 24,
                 position: 'relative',
                 zIndex: 1,
+                margin: '0 0 20px',
+              }}
+            >
+              Los programas tienen track en inglés. Las críticas de estudio,
+              los tutores, la ciudad — eso es en el idioma del país.
+            </p>
+
+            {/* Sub-text */}
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 15,
+                fontWeight: 300,
+                color: 'rgba(245,240,232,0.5)',
+                lineHeight: 1.6,
                 margin: '0 0 24px',
               }}
             >
-              El portafolio abre la puerta. El idioma determina si te dejan entrar.
+              La pregunta no es si puedes entrar sin el idioma. La pregunta es
+              qué tan adentro llegas con él.
             </p>
 
             {/* Attribution */}
