@@ -212,13 +212,15 @@ export default function ContactForm() {
                 margin: '0 0 28px',
               }}
             >
-              Reserva tu
+              El programa
               <br />
-              <em style={{ fontStyle: 'italic', color: '#c4603a' }}>lugar.</em>
+              inicia el 22 de
               <br />
-              Las clases inician
+              <em style={{ fontStyle: 'italic', color: '#c4603a' }}>junio.</em>
               <br />
-              el 22 de junio.
+              Primero, la
+              <br />
+              conversación.
             </h2>
 
             {/* Body */}
@@ -232,9 +234,10 @@ export default function ContactForm() {
                 margin: 0,
               }}
             >
-              Las plazas son limitadas. Cada cohorte es pequeña por diseño — grupos reducidos
-              para garantizar atención real. Si tienes interés, es mejor iniciar la conversación
-              ahora.
+              Cada cohorte tiene seis estudiantes. Antes de inscribirte, hablamos:
+              queremos entender la escuela a la que apuntas, en qué momento del proceso
+              estás y si el programa es el correcto para ti ahora. Si hay fit, avanzamos.
+              Si no, te lo decimos con honestidad.
             </p>
 
             {/* WhatsApp CTA */}
@@ -267,7 +270,7 @@ export default function ContactForm() {
               >
                 <path d={WHATSAPP_SVG_PATH} />
               </svg>
-              Escribir por WhatsApp
+              Iniciar la conversación
             </a>
           </motion.div>
 
