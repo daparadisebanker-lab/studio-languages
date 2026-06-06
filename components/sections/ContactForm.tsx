@@ -212,15 +212,13 @@ export default function ContactForm() {
                 margin: '0 0 28px',
               }}
             >
-              El programa
+              El talento
               <br />
-              inicia el 22 de
+              latinoamericano
               <br />
-              <em style={{ fontStyle: 'italic', color: '#c4603a' }}>junio.</em>
+              es un arte
               <br />
-              Primero, la
-              <br />
-              conversación.
+              <em style={{ fontStyle: 'italic', color: '#c4603a' }}>en sí mismo.</em>
             </h2>
 
             {/* Body */}
@@ -234,10 +232,8 @@ export default function ContactForm() {
                 margin: 0,
               }}
             >
-              Cada cohorte tiene seis estudiantes. Antes de inscribirte, hablamos:
-              queremos entender la escuela a la que apuntas, en qué momento del proceso
-              estás y si el programa es el correcto para ti ahora. Si hay fit, avanzamos.
-              Si no, te lo decimos con honestidad.
+              Este programa es para quienes ya saben a dónde van.
+              Las clases inician el 22 de junio.
             </p>
 
             {/* WhatsApp CTA */}
