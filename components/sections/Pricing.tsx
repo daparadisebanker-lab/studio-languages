@@ -29,14 +29,50 @@ const CURRICULUM_PREVIEW: Record<CurriculumLang, { num: string; title: string; s
   ],
 }
 
+// ─── Admisión program (6 semanas) ────────────────────────────────────────────
+
+const ADMISION_PROGRAM: { num: string; title: string; subtitle: string; tags: string[] }[] = [
+  { num: 'S01', title: 'Diagnóstico y Posicionamiento',        subtitle: 'Análisis del trabajo y definición de la voz conceptual',         tags: ['Revisión de portafolio', 'Voz artística', 'Institución objetivo', 'Candidatos admitidos'] },
+  { num: 'S02', title: 'Artist Statement — Primera versión',   subtitle: 'Redacción guiada con retroalimentación editorial',                tags: ['Redacción guiada', 'Registro académico', 'Revisión crítica', 'Calibración institucional'] },
+  { num: 'S03', title: 'Artist Statement — Versión final',     subtitle: 'Refinamiento, tono y entrega del documento',                     tags: ['Edición final', 'Coherencia conceptual', 'Entregable 1'] },
+  { num: 'S04', title: 'Carta de Motivación',                  subtitle: 'Estructura, narrativa institucional y fit académico',             tags: ['Motivación académica', 'Trayectoria', 'Proyecto futuro', 'Entregable 2'] },
+  { num: 'S05', title: 'Revisión de Portafolio',               subtitle: 'Selección, secuencia y argumentación de obra',                   tags: ['Curaduría', 'Argumentación formal', 'Textos de obra', 'Presentación visual'] },
+  { num: 'S06', title: 'Simulación de Entrevista',             subtitle: 'Mock interview + entregables finales y checklist de aplicación',  tags: ['Defensa en vivo', 'Feedback inmediato', 'Checklist por institución', 'Entregable final'] },
+]
+
 // ─── Curriculum modal ─────────────────────────────────────────────────────────
+
+type ModalType = 'programa' | 'admision'
 
 const MODAL_TABS: { id: CurriculumLang; label: string; stripes: [string, string, string] }[] = [
   { id: 'it', label: 'Italiano', stripes: ['#009246', '#c2bfb9', '#CE2B37'] },
   { id: 'fr', label: 'Français', stripes: ['#002395', '#c2bfb9', '#ED2939'] },
 ]
 
-function CurriculumModal({ onClose }: { onClose: () => void }) {
+function ModuleRow({ num, title, subtitle, tags, isMobile }: { num: string; title: string; subtitle: string; tags: string[]; isMobile: boolean }) {
+  return (
+    <div style={{ background: '#ede8df', padding: isMobile ? '20px' : '24px 28px' }}>
+      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#c4603a', opacity: 0.7 }}>
+        {num}
+      </span>
+      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: isMobile ? 18 : 22, fontWeight: 400, fontStyle: 'italic', color: '#1a1410', margin: '6px 0 4px', lineHeight: 1.2 }}>
+        {title}
+      </h3>
+      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.1em', color: '#c4603a', opacity: 0.75, margin: '0 0 12px' }}>
+        {subtitle}
+      </p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+        {tags.map(tag => (
+          <span key={tag} style={{ fontFamily: 'var(--font-mono)', fontSize: 9.5, letterSpacing: '0.07em', color: '#1a1410', background: 'rgba(26,20,16,0.06)', padding: '4px 10px', borderRadius: 2 }}>
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function CurriculumModal({ type, onClose }: { type: ModalType; onClose: () => void }) {
   const [activeTab, setActiveTab] = useState<CurriculumLang>('it')
   const isMobile = useIsMobile()
 
@@ -46,7 +82,9 @@ function CurriculumModal({ onClose }: { onClose: () => void }) {
     return () => window.removeEventListener('keydown', handler)
   }, [onClose])
 
-  const modules = CURRICULUM_PREVIEW[activeTab]
+  const isAdmision = type === 'admision'
+  const modules = isAdmision ? ADMISION_PROGRAM : CURRICULUM_PREVIEW[activeTab]
+  const headerLabel = isAdmision ? 'Programa de Admisión · 6 Semanas' : 'Curriculum del programa'
 
   return (
     <div
@@ -84,98 +122,83 @@ function CurriculumModal({ onClose }: { onClose: () => void }) {
       >
         {/* Sticky header */}
         <div style={{
-          position: 'sticky',
-          top: 0,
-          background: '#f5f0e8',
-          zIndex: 2,
+          position: 'sticky', top: 0, background: '#f5f0e8', zIndex: 2,
           borderBottom: '1px solid rgba(26,20,16,0.07)',
           padding: isMobile ? '20px 24px 16px' : '24px 40px 20px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#c4603a', margin: 0 }}>
-            Curriculum del programa
+            {headerLabel}
           </p>
-          <button
-            onClick={onClose}
-            style={{ background: 'none', border: '1px solid rgba(26,20,16,0.15)', cursor: 'pointer', padding: '6px 10px', color: 'rgba(26,20,16,0.5)', fontSize: 14, lineHeight: 1, fontFamily: 'var(--font-mono)' }}
-          >
+          <button onClick={onClose} style={{ background: 'none', border: '1px solid rgba(26,20,16,0.15)', cursor: 'pointer', padding: '6px 10px', color: 'rgba(26,20,16,0.5)', fontSize: 14, lineHeight: 1, fontFamily: 'var(--font-mono)' }}>
             ✕
           </button>
         </div>
 
-        {/* Tab bar */}
-        <div style={{ padding: isMobile ? '16px 24px 0' : '20px 40px 0', display: 'flex', gap: 6 }}>
-          {MODAL_TABS.map(tab => {
-            const active = activeTab === tab.id
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 10,
-                  fontFamily: 'var(--font-mono)', fontSize: 11,
-                  textTransform: 'uppercase', letterSpacing: '0.15em',
-                  padding: '9px 18px',
-                  background: active ? '#1a1410' : 'transparent',
-                  border: `1px solid ${active ? '#1a1410' : 'rgba(26,20,16,0.2)'}`,
-                  cursor: 'pointer',
-                  color: active ? '#f5f0e8' : 'rgba(26,20,16,0.45)',
-                  transition: 'all 0.2s ease',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  {tab.stripes.map((c, i) => (
-                    <span key={i} style={{ width: 14, height: 2, background: c, display: 'block', borderRadius: 1, opacity: active ? 1 : 0.6 }} />
-                  ))}
-                </span>
-                {tab.label}
-              </button>
-            )
-          })}
-        </div>
+        {/* IT/FR tab bar — only for programa */}
+        {!isAdmision && (
+          <div style={{ padding: isMobile ? '16px 24px 0' : '20px 40px 0', display: 'flex', gap: 6 }}>
+            {MODAL_TABS.map(tab => {
+              const active = activeTab === tab.id
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 10,
+                    fontFamily: 'var(--font-mono)', fontSize: 11,
+                    textTransform: 'uppercase', letterSpacing: '0.15em',
+                    padding: '9px 18px',
+                    background: active ? '#1a1410' : 'transparent',
+                    border: `1px solid ${active ? '#1a1410' : 'rgba(26,20,16,0.2)'}`,
+                    cursor: 'pointer',
+                    color: active ? '#f5f0e8' : 'rgba(26,20,16,0.45)',
+                    transition: 'all 0.2s ease', whiteSpace: 'nowrap',
+                  }}
+                >
+                  <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    {tab.stripes.map((c, i) => (
+                      <span key={i} style={{ width: 14, height: 2, background: c, display: 'block', borderRadius: 1, opacity: active ? 1 : 0.6 }} />
+                    ))}
+                  </span>
+                  {tab.label}
+                </button>
+              )
+            })}
+          </div>
+        )}
+
+        {/* Admisión intro — only for admision */}
+        {isAdmision && (
+          <p style={{
+            fontFamily: 'var(--font-body)', fontSize: 14, fontWeight: 300,
+            lineHeight: 1.65, color: 'rgba(26,20,16,0.6)',
+            padding: isMobile ? '16px 24px 0' : '20px 40px 0',
+            margin: 0, maxWidth: 560,
+          }}>
+            Programa cerrado de seis semanas para estudiantes con nivel intermedio.
+            Cada sesión produce un entregable real — ninguna sesión es solo teoría.
+          </p>
+        )}
 
         {/* Modules list */}
         <div style={{ padding: isMobile ? '16px 24px 0' : '20px 40px 0', display: 'flex', flexDirection: 'column', gap: 2, flex: 1 }}>
           {modules.map(mod => (
-            <div key={mod.num} style={{ background: '#ede8df', padding: isMobile ? '20px' : '24px 28px' }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.2em', color: '#c4603a', opacity: 0.7 }}>
-                {mod.num}
-              </span>
-              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: isMobile ? 18 : 22, fontWeight: 400, fontStyle: 'italic', color: '#1a1410', margin: '6px 0 4px', lineHeight: 1.2 }}>
-                {mod.title}
-              </h3>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.1em', color: '#c4603a', opacity: 0.75, margin: '0 0 12px' }}>
-                {mod.subtitle}
-              </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-                {mod.tags.map(tag => (
-                  <span key={tag} style={{ fontFamily: 'var(--font-mono)', fontSize: 9.5, letterSpacing: '0.07em', color: '#1a1410', background: 'rgba(26,20,16,0.06)', padding: '4px 10px', borderRadius: 2 }}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <ModuleRow key={mod.num} {...mod} isMobile={isMobile} />
           ))}
         </div>
 
         {/* Footer */}
         <div style={{ padding: isMobile ? '20px 24px 32px' : '24px 40px 36px', marginTop: 4, borderTop: '1px solid rgba(26,20,16,0.07)' }}>
-          <a
-            href="#curriculum"
-            onClick={onClose}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              fontFamily: 'var(--font-mono)', fontSize: 10,
-              letterSpacing: '0.15em', textTransform: 'uppercase',
-              color: '#c4603a', textDecoration: 'none',
-              borderBottom: '1px solid rgba(196,96,58,0.4)', paddingBottom: 2,
-            }}
-          >
-            Ver contenido completo en la página →
-          </a>
+          {isAdmision ? (
+            <a href="#inscripcion" onClick={onClose} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#c4603a', textDecoration: 'none', borderBottom: '1px solid rgba(196,96,58,0.4)', paddingBottom: 2 }}>
+              Iniciar la conversación →
+            </a>
+          ) : (
+            <a href="#curriculum" onClick={onClose} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#c4603a', textDecoration: 'none', borderBottom: '1px solid rgba(196,96,58,0.4)', paddingBottom: 2 }}>
+              Ver contenido completo en la página →
+            </a>
+          )}
         </div>
       </motion.div>
     </div>
@@ -429,9 +452,10 @@ function PriceCard({ badge, format, duration, desc, amount, note, bundle, detail
   )
 }
 
-const tiers: Omit<PriceCardProps, 'index' | 'isMobile' | 'onOpenCurriculum'>[] = [
+const tiers: (Omit<PriceCardProps, 'index' | 'isMobile' | 'onOpenCurriculum'> & { curriculumType: ModalType })[] = [
   {
     badge: 'Estándar',
+    curriculumType: 'programa',
     format: 'Programa mensual',
     duration: 'Clases virtuales grupales',
     desc: 'Clases en línea con profesor nativo especializado en arte y diseño. Para estudiantes en etapa de preparación con 12+ meses antes de su aplicación.',
@@ -447,6 +471,7 @@ const tiers: Omit<PriceCardProps, 'index' | 'isMobile' | 'onOpenCurriculum'>[] =
   },
   {
     badge: 'Más elegido',
+    curriculumType: 'programa',
     format: 'Programa intensivo',
     duration: 'Clases virtuales grupales',
     desc: 'Mayor frecuencia semanal. Para estudiantes en año de aplicación activo o que quieren acelerar el progreso hacia su institución objetivo.',
@@ -462,6 +487,7 @@ const tiers: Omit<PriceCardProps, 'index' | 'isMobile' | 'onOpenCurriculum'>[] =
   },
   {
     badge: 'Admisión',
+    curriculumType: 'admision',
     format: 'Paquete de admisión',
     duration: 'Proyecto cerrado · 6 semanas',
     desc: 'Para estudiantes con nivel intermedio que necesitan los materiales de aplicación: artist statement, carta de motivación y preparación para entrevista de portafolio.',
@@ -478,17 +504,17 @@ const tiers: Omit<PriceCardProps, 'index' | 'isMobile' | 'onOpenCurriculum'>[] =
 
 export default function Pricing() {
   const isMobile = useIsMobile()
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalType, setModalType] = useState<ModalType | null>(null)
 
   useEffect(() => {
-    document.body.style.overflow = modalOpen ? 'hidden' : ''
+    document.body.style.overflow = modalType ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
-  }, [modalOpen])
+  }, [modalType])
 
   return (
     <>
     <AnimatePresence>
-      {modalOpen && <CurriculumModal onClose={() => setModalOpen(false)} />}
+      {modalType && <CurriculumModal type={modalType} onClose={() => setModalType(null)} />}
     </AnimatePresence>
     <section
       style={{
@@ -570,8 +596,8 @@ export default function Pricing() {
             marginTop: '64px',
           }}
         >
-          {tiers.map((tier, i) => (
-            <PriceCard key={tier.badge} {...tier} index={i} isMobile={isMobile} onOpenCurriculum={() => setModalOpen(true)} />
+          {tiers.map(({ curriculumType, ...tier }, i) => (
+            <PriceCard key={tier.badge} {...tier} index={i} isMobile={isMobile} onOpenCurriculum={() => setModalType(curriculumType)} />
           ))}
         </div>
 
