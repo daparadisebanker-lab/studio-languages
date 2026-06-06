@@ -19,7 +19,7 @@ const points = [
   {
     num: '03',
     title: 'Alfabetización cultural real',
-    text: 'Un estudiante que puede hablar de Brunelleschi en italiano o de Maison Margiela en francés no solo tiene el idioma. Tiene la legibilidad institucional que cambia cómo lo percibe un comité de admisión.',
+    text: 'Un estudiante que puede hablar de la historia de su disciplina en el idioma de la institución no solo domina el idioma — tiene la legibilidad cultural que cambia cómo lo percibe un comité de admisión europeo.',
   },
   {
     num: '04',
@@ -110,15 +110,15 @@ export default function ElPrograma() {
                 margin: 0,
               }}
             >
-              No enseñamos italiano.
+              No enseñamos idiomas.
               <br />
               Preparamos estudiantes
               <br />
               para{' '}
               <em style={{ fontStyle: 'italic', color: '#c4603a' }}>
-                estudiar diseño
+                estudiar arte
                 <br />
-                en Milán.
+                y diseño en Europa.
               </em>
             </p>
           </motion.div>
