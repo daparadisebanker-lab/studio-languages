@@ -28,6 +28,20 @@
   --ease-in-out:   cubic-bezier(0.76, 0, 0.24, 1);
 }
 
+/* Type scale system */
+:root {
+  --text-display-xl: clamp(80px, 12vw, 160px);
+  --text-display-l:  clamp(56px, 7vw, 96px);
+  --text-display-m:  clamp(40px, 5vw, 72px);
+  --text-display-s:  clamp(28px, 3vw, 44px);
+  --text-heading:    clamp(20px, 2vw, 28px);
+  --text-body-l:     17px;
+  --text-body:       15px;
+  --text-body-s:     13px;
+  --text-label:      10px;
+  --text-label-s:    9px;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -108,11 +122,12 @@ a { text-decoration: none; color: inherit; }
 /* ── Section label pattern ─────────────────────────────────── */
 .section-label {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--text-label);
+  font-weight: 400;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: #c4603a;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
   gap: 12px;
