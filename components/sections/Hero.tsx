@@ -571,7 +571,7 @@ export default function Hero() {
                 color: '#c4603a',
               }}
             >
-              Cohorte Inaugural · Julio 2026
+              Cohorte Inaugural · Junio 2026
             </span>
           </motion.div>
 

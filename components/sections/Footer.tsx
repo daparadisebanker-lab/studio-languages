@@ -130,7 +130,7 @@ export default function Footer() {
               color: 'rgba(245,240,232,0.2)',
             }}
           >
-            Formación creativa pre-universitaria · Programas de idiomas para arte y diseño
+            Idiomas para el ecosistema creativo europeo
           </span>
         </div>
       </div>

@@ -912,7 +912,7 @@ export default function Pricing() {
             margin: 0,
             opacity: 0.8,
           }}>
-            Cohorte inaugural · Julio 2026 · Cierre de inscripciones: 30 de junio
+            Cohorte inaugural · 22 de junio 2026 · Cierre de inscripciones: 30 de junio
           </p>
         </motion.div>
 

@@ -230,24 +230,6 @@ export default function Manifesto() {
               Pertenecer al ecosistema creativo europeo es la promesa.
             </motion.p>
 
-            {/* Closing line */}
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(28px, 3vw, 42px)',
-                fontWeight: 300,
-                fontStyle: 'italic',
-                color: '#c8451a',
-                marginTop: '2.5rem',
-                marginBottom: 0,
-              }}
-            >
-              No enseñamos el idioma. Abrimos la puerta.
-            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
